@@ -1,4 +1,7 @@
 package Base;
+
+import java.util.Scanner;
+
 /*
 UCF COP3330 Summer 2021 Assignment 1 Solution
 Copyright 2021 Alek Dussuau
@@ -50,6 +53,34 @@ Develop this as a mobile application that makes it easy to record each drink, up
  */
 public class App {
     public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
 
+        //inputs
+        System.out.print("Enter a 1 is you are male or a 2 if you are female: ");
+        String buff_gender = input.nextLine();
+        System.out.print("How many ounces of alcohol did you have? ");
+        String buff_alcohol = input.nextLine();
+        System.out.print("What is your weight, in pounds? ");
+        String buff_weight = input.nextLine();
+        System.out.print("How many hours has it been since your last drink? ");
+        String buff_time = input.nextLine();
+
+        //parsing
+        int alcohol = Integer.parseInt(buff_alcohol);
+        int weight = Integer.parseInt(buff_weight);
+        int time = Integer.parseInt(buff_time);
+        int gender = Integer.parseInt(buff_gender);
+
+        //conditional
+        final double ratio = gender == 1 ? .73 : .66;
+
+        //math
+        double BAC = (alcohol * 5.14 / weight * ratio) - (.015 * time);
+
+        //conditional
+        final String output = BAC > .08 ? "It is not legal for you to drive" : "It is legal for you to drive";
+
+        //outputs
+        System.out.printf("Your BAC is %f\n" + output, BAC);
     }
 }
